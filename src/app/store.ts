@@ -1,17 +1,21 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit'
+import singInReducer from '../features/signin/signInSlice'
+import singUpReducer from '../features/signup/signUpSlice'
+import rolesReducer from '../features/roles/rolesSlice'
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
-});
+    reducer: {
+        signin: singInReducer,
+        signup: singUpReducer,
+        roles: rolesReducer,
+    },
+})
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
 export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+>

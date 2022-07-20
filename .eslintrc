@@ -1,0 +1,24 @@
+{
+    "extends": [
+        "react-app",
+        "plugin:jsx-a11y/recommended",
+        "prettier",
+        "eslint-config-prettier"
+    ],
+    "plugins": ["jsx-a11y", "prettier"],
+    "rules": {
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".js", ".ts", ".jsx", ".tsx"]
+            }
+        ],
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+        ]
+    }
+}
