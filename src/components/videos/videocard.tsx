@@ -7,17 +7,18 @@ import IconButton, {IconButtonProps} from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import {styled} from '@mui/material/styles'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import {Link} from 'react-router-dom'
 import {Video} from '../../types/video'
 
 interface Props {
     video: Video
 }
 
-interface ExpandMoreProps extends IconButtonProps {
+interface LikeVideoActionProps extends IconButtonProps {
     liked: boolean
 }
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
+const LikeVideoAction = styled((props: LikeVideoActionProps) => {
     const {liked, ...other} = props
     return <IconButton {...other} />
 })(({theme, liked}) => ({
@@ -48,26 +49,28 @@ const VideoCard = ({video}: Props) => {
 
     return (
         <Card sx={{maxWidth: 345}}>
-            <CardMedia
-                component="img"
-                height="194"
-                image={getYTThumbail(video.videourl, 'big')}
-                alt="video info"
-            />
+            <a href={video.videourl} target={'_blank'}>
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image={getYTThumbail(video.videourl, 'big')}
+                    alt="video info"
+                />
+            </a>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     {video.title}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <ExpandMore
+                <LikeVideoAction
                     liked={liked}
                     onClick={handleLikedClick}
                     aria-expanded={liked}
                     aria-label="like"
                 >
                     <FavoriteIcon />
-                </ExpandMore>
+                </LikeVideoAction>
             </CardActions>
         </Card>
     )
