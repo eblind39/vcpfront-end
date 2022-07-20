@@ -16,7 +16,7 @@ const initialState: RoleState = {
     error: '',
 }
 
-export const getRoles = createAsyncThunk('roles/getall', async () => {
+export const fetchRoles = createAsyncThunk('roles/getall', async () => {
     const apiURL = `${API_URL}/roles`
 
     const response = await fetch(apiURL, {
@@ -41,20 +41,20 @@ export const rolesSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(getRoles.pending, (state, action) => {
+        builder.addCase(fetchRoles.pending, (state, action) => {
             state.rolesdata = []
             state.loading = 'pending'
             state.error = ''
         })
         builder.addCase(
-            getRoles.fulfilled,
+            fetchRoles.fulfilled,
             (state, action: PayloadAction<Role[]>) => {
                 state.rolesdata = action.payload
                 state.loading = 'succeeded'
                 state.error = ''
             },
         )
-        builder.addCase(getRoles.rejected, (state, action) => {
+        builder.addCase(fetchRoles.rejected, (state, action) => {
             state.rolesdata = []
             state.loading = 'failed'
             state.error = action.error.message?.toString()

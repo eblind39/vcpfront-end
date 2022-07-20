@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useCallback, useEffect, useState} from 'react'
+import React, {SyntheticEvent, useEffect, useState} from 'react'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -18,7 +18,6 @@ import {Link, useNavigate} from 'react-router-dom'
 import {isAuthenticated, validateEmail} from '../../utils'
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {signUp} from '../../features/signup/signUpSlice'
-import {getRoles} from '../../features/roles/rolesSlice'
 
 const theme = createTheme()
 
@@ -28,31 +27,18 @@ const SignUp = () => {
     const [name, setName] = useState<string>('')
     const [role, setRole] = useState<string>('')
     const [errorMsg, setErrorMsg] = useState<string>('')
-    const [doingSignUp, setDoingSignUp] = useState<boolean>(false)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const signUpData = useAppSelector(state => state.signup.signupdata)
     const signUploading = useAppSelector(state => state.signup.loading)
     const signUpError = useAppSelector(state => state.signup.error)
-    const rolesData = useAppSelector(state => state.roles.rolesdata)
-    const rolesLoading = useAppSelector(state => state.roles.loading)
-
-    const getRolesRdx = useCallback(() => {
-        console.log('fetching roles', rolesData)
-        dispatch(getRoles())
-    }, [getRoles])
-
-    useEffect(() => {
-        getRolesRdx()
-    }, [getRolesRdx])
 
     useEffect(() => {
         if (isAuthenticated()) navigate('/', {replace: true})
-    }, [])
+    }, [navigate])
 
     useEffect(() => {
         if (signUploading === 'succeeded') navigate('/signin', {replace: true})
-    }, [signUploading])
+    }, [signUploading, navigate])
 
     const doSignUp = async (evt: SyntheticEvent) => {
         evt.preventDefault()
@@ -98,20 +84,6 @@ const SignUp = () => {
         }
         return true
     }
-
-    const renderRoles = useCallback((): JSX.Element[] => {
-        console.log('renderRoles', rolesData)
-        return rolesData.map(role => {
-            return (
-                // <MenuItem key={role.id} value={role.id}>
-                //     {role.name}
-                // </MenuItem>
-                <option key={role.id} value={role.id}>
-                    {role.name}
-                </option>
-            )
-        })
-    }, [])
 
     return (
         <ThemeProvider theme={theme}>
@@ -203,7 +175,6 @@ const SignUp = () => {
                                     </MenuItem>
                                     <MenuItem value="1">Teacher</MenuItem>
                                     <MenuItem value="2">Student</MenuItem>
-                                    {/* {renderRoles()} */}
                                 </Select>
                             </Grid>
                         </Grid>
@@ -212,10 +183,10 @@ const SignUp = () => {
                             fullWidth
                             variant="contained"
                             onClick={doSignUp}
-                            disabled={doingSignUp}
+                            disabled={signUploading === 'pending'}
                             sx={{mt: 3, mb: 2}}
                         >
-                            Sign In
+                            Sign Up
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>

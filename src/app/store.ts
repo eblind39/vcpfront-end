@@ -2,12 +2,14 @@ import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit'
 import singInReducer from '../features/signin/signInSlice'
 import singUpReducer from '../features/signup/signUpSlice'
 import rolesReducer from '../features/roles/rolesSlice'
+import videosReducer from '../features/videos/videosSlice'
 
 export const store = configureStore({
     reducer: {
         signin: singInReducer,
         signup: singUpReducer,
         roles: rolesReducer,
+        videos: videosReducer,
     },
 })
 

@@ -53,7 +53,7 @@ export const signUp = createAsyncThunk(
 )
 
 export const singUpSlice = createSlice({
-    name: 'signin',
+    name: 'signup',
     initialState,
     reducers: {},
     extraReducers: builder => {
