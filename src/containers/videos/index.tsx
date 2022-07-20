@@ -68,55 +68,53 @@ const Videos = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
+            <Box sx={{flexGrow: 1}}>
+                <Grid
+                    container
+                    spacing={{xs: 2, md: 3}}
+                    columns={{xs: 4, sm: 8, md: 12}}
                 >
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            {videosData.map((video, index) => {
-                                if (
-                                    index === videosData.length - 1 &&
-                                    !isLoading &&
-                                    pageNumber <= totalPages
-                                )
-                                    return (
-                                        <div
-                                            key={`${video.id}-${index}`}
-                                            ref={setLastElement}
-                                        >
-                                            <Grid key={video.id}>
-                                                <VideoCard video={video} />
-                                            </Grid>
-                                        </div>
-                                    )
-                                else
-                                    return (
-                                        <Grid key={video.id}>
-                                            <VideoCard video={video} />
-                                        </Grid>
-                                    )
-                            })}
-                            <Grid>
-                                <Loading showif={isLoading === 'pending'} />
-                                <NoDataFound
-                                    showif={totalVideos === 0 && !isLoading}
-                                />
-                                <NoMoreData
-                                    showif={pageNumber - 1 === totalPages}
-                                />
-                                <ScrollToTopPage />
-                            </Grid>
-                        </Grid>
+                    {videosData.map((video, index) => {
+                        if (
+                            index === videosData.length - 1 &&
+                            !(isLoading === 'pending') &&
+                            pageNumber <= totalPages
+                        )
+                            return (
+                                <div
+                                    key={`${video.id}-${index}`}
+                                    ref={setLastElement}
+                                >
+                                    <Grid
+                                        item
+                                        xs={2}
+                                        sm={4}
+                                        md={4}
+                                        key={video.id}
+                                    >
+                                        <VideoCard video={video} />
+                                    </Grid>
+                                </div>
+                            )
+                        else
+                            return (
+                                <Grid item xs={2} sm={4} md={4} key={video.id}>
+                                    <VideoCard video={video} />
+                                </Grid>
+                            )
+                    })}
+                    <Grid>
+                        <Loading showif={isLoading === 'pending'} />
+                        <NoDataFound
+                            showif={
+                                totalVideos === 0 && !(isLoading === 'pending')
+                            }
+                        />
+                        <NoMoreData showif={pageNumber - 1 === totalPages} />
+                        <ScrollToTopPage />
                     </Grid>
-                </Box>
-            </Container>
+                </Grid>
+            </Box>
         </ThemeProvider>
     )
 }

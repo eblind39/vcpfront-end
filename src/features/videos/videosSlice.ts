@@ -83,7 +83,12 @@ export const videosSlice = createSlice({
                         (video, index) =>
                             !state.videosdata.some(vid => vid.id === video.id),
                     )
-                    state.videosdata = [...state.videosdata, ...arrTmp]
+                    // let sttTmp = state.videosdata
+                    // state.videosdata = [...sttTmp, ...arrTmp]
+
+                    // console.log(state.videosdata)
+                    state.videosdata.push(...arrTmp)
+                    console.log(state.videosdata)
 
                     state.totalPages = vidData.meta.totalPages
                     state.totalVideos = vidData.meta.totalItems
