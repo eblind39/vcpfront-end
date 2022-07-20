@@ -5,6 +5,9 @@ This project was bootstrapped with
 [Redux](https://redux.js.org/) and
 [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
+> **_NOTE:_** Completed functionalities: _Sign Up_, _Sign In_, _Sign Out_, and
+> partially _Video List_ on the homepage.
+
 ## Available Scripts
 
 In the project directory, you can run:

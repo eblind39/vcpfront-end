@@ -24,7 +24,6 @@ const SignIn = () => {
     const [errorMsg, setErrorMsg] = useState<string>('')
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const signInData = useAppSelector(state => state.signin.signindata)
     const signInloading = useAppSelector(state => state.signin.loading)
     const signInError = useAppSelector(state => state.signin.error)
 
