@@ -1,11 +1,11 @@
 import React, {useEffect, useCallback, useRef, useState} from 'react'
-import CssBaseline from '@mui/material/CssBaseline'
+// import CssBaseline from '@mui/material/CssBaseline'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
+// import Container from '@mui/material/Container'
 import {createTheme, ThemeProvider} from '@mui/material/styles'
-import {isAuthenticated} from '../../utils'
-import {useNavigate} from 'react-router-dom'
+// import {isAuthenticated} from '../../utils'
+// import {useNavigate} from 'react-router-dom'
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import {fetchVideos, incPageNumber} from '../../features/videos/videosSlice'
 import Loading from '../common/loading'
@@ -24,7 +24,7 @@ const Videos = () => {
     const totalPages = useAppSelector(state => state.videos.totalPages)
     const totalVideos = useAppSelector(state => state.videos.totalVideos)
     const dispatch = useAppDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const getVideos = useCallback(() => {
         dispatch(fetchVideos())
@@ -36,9 +36,9 @@ const Videos = () => {
         }
     }, [pageNumber, getVideos])
 
-    useEffect(() => {
-        if (!isAuthenticated()) navigate('/signin', {replace: true})
-    }, [navigate])
+    // useEffect(() => {
+    //     if (!isAuthenticated()) navigate('/signin', {replace: true})
+    // }, [navigate])
 
     // Start infinite scroll
     const observer = useRef(

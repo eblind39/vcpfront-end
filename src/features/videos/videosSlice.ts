@@ -36,7 +36,7 @@ export const fetchVideos = createAsyncThunk<
         state: RootState
         dispatch: AppDispatch
     }
->('roles/getall', async (arg, {getState, dispatch}) => {
+>('videos/getall', async (arg, {getState, dispatch}) => {
     const pNumber = getState().videos.pageNumber
 
     const apiURL = `${API_URL}/videos?page=${pNumber}&limit=24`
@@ -60,7 +60,7 @@ export const fetchVideos = createAsyncThunk<
 })
 
 export const videosSlice = createSlice({
-    name: 'roles',
+    name: 'videos',
     initialState,
     reducers: {
         incPageNumber: state => {

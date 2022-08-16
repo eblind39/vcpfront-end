@@ -34,7 +34,7 @@ const SignIn = () => {
     useEffect(() => {
         if (signInloading === 'succeeded' && isAuthenticated())
             navigate('/', {replace: true})
-    }, [signInloading])
+    }, [signInloading, navigate])
 
     const doSignIn = async (evt: SyntheticEvent) => {
         evt.preventDefault()
